@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Team {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "team_id")
@@ -23,6 +22,5 @@ public class Team {
 
   @OneToMany(mappedBy = "team")
   List<Member> members = new ArrayList<>();
-
 
 }

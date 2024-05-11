@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.5'
@@ -31,7 +37,10 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.2.0'
 
+    // queryDsl
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
@@ -46,6 +55,7 @@ tasks.named('test') {
 
 // === ⭐ QueryDsl 빌드 옵션 (선택) ===
 def querydslDir = layout.buildDirectory.dir("generated/querydsl").get().asFile
+
 sourceSets {
     main.java.srcDirs += [ querydslDir ]
 }
